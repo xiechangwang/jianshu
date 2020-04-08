@@ -1,0 +1,202 @@
+---------------------CSS模块化管理--------------------------
+--运用第三方模块npm install styled-components
+1.样式放在js文件中，index.css--->style.js
+2.js中导入
+    import {createGlobalStyle} from 'styled-components';
+    export const Globalstyle = createGlobalStyle`
+        body{
+            margin:0;
+            padding:0;
+            background:red;
+        }`
+3.使用，在js文件已组件导入
+    import {Globalstyle} from style.js
+    ReactDOM.render(
+        <React.StrictMode>
+            <Globalstyle/>
+            <App />
+        </React.StrictMode>,
+        document.getElementById('root')
+    );     
+
+4.清楚样式
+    reset.css
+    清除默认样式放在
+    createGlabalStyle`
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed, 
+        figure, figcaption, footer, header, hgroup, 
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+        /* HTML5 display-role reset for older browsers */
+        article, aside, details, figcaption, figure, 
+        footer, header, hgroup, menu, nav, section {
+            display: block;
+        }
+        body {
+            line-height: 1;
+        }
+        ol, ul {
+            list-style: none;
+        }
+        blockquote, q {
+            quotes: none;
+        }
+        blockquote:before, blockquote:after,
+        q:before, q:after {
+            content: '';
+            content: none;
+        }
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+    `;    
+
+
+5、局部使用，新建style.js    
+                import styled from 'styled-components'
+                import logoPic from '../../statics/logo.png';   //图片引入方式
+
+                export const HeaderWrapper=styled.div`
+                    height:56px;
+                    background:red;
+                    background:url(${logoPic});
+                    
+                    //类名的使用------ &.类名
+                    &.left{}    
+                ` 
+            在组件中引入index.js
+                import {HeaderWrapper} from './style';
+                class Header extends Component{
+                    render(){
+                        return(
+                            <HeaderWrapper>Header</HeaderWrapper>
+                        )
+                    }
+                }
+
+6、使用字体图标iconfont
+     在iconfont网站加入项目后‘下载至本地’;
+     --有用文件iconfont.eot、iconfont.css、iconfont.svg、iconfont.ttf、iconfont.woff；
+     --将iconfont.css改成iconfont.js;
+     ----在iconfont.js   
+            引入import {createGlobalStyle} from 'styled-components';
+                export const Iconfont=createGlobalStyle`
+                    @font-face {
+                    font-family: "iconfont";
+                    src: url('./iconfont.eot?t=1585668259010'); /* IE9 */
+                    src: url('./iconfont.eot?t=1585668259010#iefix') format('embedded-opentype'), /* IE6-IE8 */
+                    url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAATQAAsAAAAACeQAAASCAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCDMgqHAIYaATYCJAMUCwwABCAFhG0HSxupCBFVnLnJfhTGDXcgyhJXJlP0K8bXt2Za3O/z08/jae8nmZLOQJvJPLY9SsXBDsHzY+7et6m0DdNI90qlayNBoifWOlvTMbZREapLMl3rmfr7TdqdXhrWeZxGKYQE4Tg4Zrq0CeQBTWwoWWFlBVIis2FEcv0DPgcwvts/ZBOYPtKKPg0QQNqygZ7CYlKgqxAmIQB9lZXkQdelUmKyka7QQlYWaTQDJHTTGHYRAKbrP4/+wSmkAaZmEGYmFIcWwt1zeO6G9zK9MlUEsMszAMBtHcABGwAE6DvUVAnZDNnA9T+B4g58A11JKquXxHPb524MA/J6JOmL//AAIWQJ1EAQsQgbECZ4DjLLFkugAhCKbVEBOIrdMAwYMF8rAUggAqARQD8g4EzQnD9CluLXG0tLq1Islry9WQcFDbRiYckcMfuEs0igooto7jPoLSfMH75MpTK4QnrNDXuRQJ7ksFLICiotna9HLtRIzTtATQCQQR4lxy+jPpruw9192DvXQu86auIEQgUiEUcspoVCtkCQLQlSDIbzPpGobVyNw+/bsEaVzZs3l6uiPs5Xv/Pl8vCpCpdv7viEfUqoygOBwISrxjnn6snjqXAFKegPWblTZSVTcDu+O+/8mHpFbL4m/IyYviDWXi0K4/NRH5W3gYaeJkUPU8RPaPxLjp5ATVePQx14gV7kVy5uHz3DTtVU/pGsMJ8KbDmYmKbgXx+MFZIKxr2+8ayifX6jmnc6Us19tlsRFYaDZr9/vEhRXMCCXXH4NYuQa0VyTPwoKveLZ2NB+WV+YuKPX0PjKQ97JBFoV2PJKZPNoqIDvJ5m040XNFX/aJl+MtWDK+08/PQpnCfSVboi49rx3K52bMUKDPntjIEqbDmj0x+j9oSUHfn9bZ6GUe/on28cx7xfvdBEhCtvUnYsWhGgmziGFhvPsHTaK9W5tE3qaiilmChBJi8+I2tksJMV0HPN0FRJOrEswSROd5qi44yghkPbBoNdFH22v0ywTkpeVvwmpGNx02E613BSMUbnTwxn5d0JR46BCy4lraw8MrldNvKif51k/tTWF+yQmQ/+BLC4Epil+SGeqxOYvMNh/Id8G/dh/gOi4Lrn5mXWEtiXHHmfb9IUAQDg9rq+5ehg/jNL05lynb3eCSaWmn0mKspRDILhfbmCupY3W0YeCXJ94wLVq53enmSfdEXnn23uV454VQtLtXStbEg6NpB1HSML9hqqgRtoum6h70q0fmBBDEXp4dILIEy9IRn7g2zqgyzYL1Rrf2imMYS+l1jsOHAa+eJR0CgmED8ht9yQpNWFkb3H9FoZcXJ1/Bmly73gO543GmGDUsac7pYGqgQkXEMI52FVMbTCBVp1MtV26boU9iDHct1beCSQoVACxJ5AzmINUpurhe/791DqqmJITNkP5RkSnbx74HN4KZCRqElVti39OzepgFLExhHBaiBEA6rEEANt+LACspQjyxFoLblUjdKKnPol9TJmXwcVhUfUSJGjRI2m83utDcf54N7Mn03a5JSjTD79yl4PAAA=') format('woff2'),
+                    url('./iconfont.woff?t=1585668259010') format('woff'),
+                    url('./iconfont.ttf?t=1585668259010') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+                    url('./iconfont.svg?t=1585668259010#iconfont') format('svg'); /* iOS 4.1- */
+                    }
+
+                    .iconfont {
+                    font-family: "iconfont" !important;
+                    font-size: 16px;
+                    font-style: normal;
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
+                    }
+                    `;
+    ----在项目入口index.js引入Iconfont组件并全局注入                
+
+7、react，css动画安装 npm install react-transition-group --save
+8、动画使用 import {CSSTransition} from 'react-transition-group'  
+                        <CSSTransition 
+                            in={this.state.focused}
+                            timeout={200}
+                            classNames="slide"
+                            >
+                                //需要使用动画的dom元素
+                        </CSSTransition>
+    a、展开动画 对应的class为slide-enter slide-enter-active
+    例：.slide-enter{
+            width:160px;
+            transition:all 0.2s ease-out;
+        };
+        .slide-enter-active{
+            width:240px;
+        };
+        .slide-exit{
+            width:240px;
+            transition:all 0.2s ease-out;
+        };
+        .slide-exit-active{
+            width:160px;
+        };
+
+9、静态完成后，使用redux管理数据存储;      
+-----安装redux、react-redux;
+-----npm install redux react-redux --save
+     使用方法参考react-redux例子项目
+10、开发者工具 npm install --save redux-devtools-extension
+    在chorme对应redux-devtools插件
+
+11、store的reducer分模块管理
+    【大的reducer.js
+        import {combineReducers} from 'redux';  //合并多个小的reducer
+        import headerReducer from '../common/header/store/reducer'; //小的reducer.js
+
+        export default combineReducers({
+            header:headerReducer
+        })    
+    】
+
+12、引入immutable.js库；
+    将数据变为immutable对象，是不可以编辑的。
+    a、在reduce.js引入
+    import {fromJS} form 'immutable'   
+    b、const  defaultState=fromJS({
+                focused:false
+            });
+    c、immutable获取数据需要用get('state对象中的数据变量名')
+            const mapStateToProps = (state) => {
+                state=state.header;
+                return {
+                    focused:state.get('focused')
+                }
+            };
+    d、immutable设置值需要用set('变量名','数据')方法
+            if(action.type===actionTypes.SEARCH_FOCUS){
+                    return state.set('focused',true)
+                    
+                    /*以下是没有用immutable之前的写法*/
+                    return{
+                         focused:true
+                    }
+                }
+
+13、安装插件redux-immutable
+    大的store文件中的reducer.js引入redux-immutable代替之前的redux
+    页面中取值从state.header.get('focused')变成state.get('header').get('focused')||state.getIn(['header','focused'])                
+
+
+14、react的路由npm install react-router-dom --save;    
+    App.js
+        import { BrowserRouter,Route } from 'react-router-dom';
+
+        <Header/>
+      <BrowserRouter>
+        <div>
+          <Route path="/" render={()=><div>home</div>}></Route>
+          <Route path="/about" render={()=><div>about</div>}></Route>
+        </div>
+      </BrowserRouter>
