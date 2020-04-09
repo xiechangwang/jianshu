@@ -4,15 +4,23 @@ import {
     HomeLeft,
     HomeRight
 } from './style';
+import Topic from './components/Topic';
+import List from './components/List';
+import Writer from './components/Writer';
+import Recommed from './components/Recommed';
 
 class Home extends Component{
     render(){
         return(
             <HomeWrapper>
                 <HomeLeft>
-                    <img className="banner-img" src="//upload-images.jianshu.io/upload_images/6126137-b875c763bdaa0006?imageMogr2/auto-orient/strip|imageView2/2/w/994/format/webp"/>
+                    <Topic/>
+                    <List/>
                 </HomeLeft>    
-                <HomeRight>right</HomeRight>
+                <HomeRight>
+                    <Recommed/>
+                    <Writer/>
+                </HomeRight>
             </HomeWrapper>
         )
     }

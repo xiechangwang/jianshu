@@ -186,8 +186,12 @@
 
 13、安装插件redux-immutable
     大的store文件中的reducer.js引入redux-immutable代替之前的redux
-    页面中取值从state.header.get('focused')变成state.get('header').get('focused')||state.getIn(['header','focused'])                
-
+    页面中取值从state.header.focused变成state.get('header').get('focused')||state.getIn(['header','focused'])                
+    **********
+    重点
+    页面中使用immutable对象数据需要用get('对象变量名')
+    **********
+    
 
 14、react的路由npm install react-router-dom --save;    
     App.js
