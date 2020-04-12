@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 // import React from 'react';
+import {withRouter} from "react-router-dom";
 import { connect } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
 import { actionCreators } from './store';
@@ -98,14 +99,14 @@ class Header extends Component {
             focused,
             handleInputFocus,
             handleInputBlur,
-            list
+            list,
         } = this.props;
         return (
             <HeaderWrapper>
                 {/* 安全区域组件 */}
                 <HeaderLimit>
                     {/* logo组件 */}
-                    <Logo />
+                    <Logo onClick={()=>this.handelClickLogo(this.props)}/>
                     {/* nav组件 */}
                     <Nav>
                         {/* navItem组件 */}
@@ -176,6 +177,16 @@ class Header extends Component {
             return null;
         }
     }
+    handelClickLogo(props){
+        console.log(props);
+        props.history.push({
+            pathname:'/detail/',
+            query:{
+                id:'1'
+            }
+        })
+    }
+
 }
 
 
@@ -233,4 +244,4 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));
